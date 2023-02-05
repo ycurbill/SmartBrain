@@ -11,10 +11,10 @@ import ParticlesBg from 'particles-bg'
 
 const USER_ID = 'yvan888';
 // Your PAT (Personal Access Token) can be found in the portal under Authentification
-const PAT = '6aaf797f4da0494cbc48e131649e5fc8';
+//const PAT = '6aaf797f4da0494cbc48e131649e5fc8';
 const APP_ID = 'my-first-application';
 // Change these to whatever model and image URL you want to use
-const MODEL_ID = 'face-detection';  
+//const MODEL_ID = 'face-detection';  
 
 const initialState = {
   input: '',
@@ -93,36 +93,33 @@ class App extends Component {
       ]
     });
 
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Key ' + PAT
-      },
-      body: raw
-    };
-
     this.setState({imageUrl: this.state.input});
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          if (result) {
-            fetch('http://localhost:3000/image', {
-              method: 'put',
-              headers: {'content-Type': 'application/json'},
-              body: JSON.stringify({
-                id: this.state.user.id
-              })
-            })
-            .then(response => response.json())
-            .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count }))
-            })
-            .catch()
-          }
-          this.displayFaceBox(this.calculateFaceLocation(result))
+    fetch('http://localhost:3000/imageurl', {
+          method: 'POST',
+          headers: {'content-Type': 'application/json'},
+          body: JSON.stringify({
+            raw: raw
+          })
         })
-        .catch(error => console.log('error', error));
+    .then(response => response.json())
+    .then(result => {
+      if (result) {
+        fetch('http://localhost:3000/image', {
+          method: 'put',
+          headers: {'content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, { entries: count }))
+        })
+        .catch(error => console.log('error', error))
+      }
+      this.displayFaceBox(this.calculateFaceLocation(result))
+    })
+    .catch(error => console.log('error', error));
   }
 
   onRouteChange = (route) => {
