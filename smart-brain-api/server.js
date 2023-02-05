@@ -11,7 +11,7 @@ import image from './controllers/image.js';
 const db = knex({
     client: 'pg',
     connection: {
-      host : 'postgres://smart_brain_db_h3ic_user:qnGIR5w56mRH24OsMccQqV7MabVsLrjK@dpg-cfg3dk82i3mg6pasoqgg-a/smart_brain_db_h3ic',
+      host : 'dpg-cfg3dk82i3mg6pasoqgg-a.frankfurt-postgres.render.com',
       port : 5432,
       user : 'smart_brain_db_h3ic_user',
       password : 'qnGIR5w56mRH24OsMccQqV7MabVsLrjK',
