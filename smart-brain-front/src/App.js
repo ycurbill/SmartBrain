@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000')
+    fetch('https://smart-brain-fmpz.onrender.com')
       .then(res => res.json())
       .then(data => console.log(data))
   }
@@ -94,7 +94,7 @@ class App extends Component {
     });
 
     this.setState({imageUrl: this.state.input});
-    fetch('http://localhost:3000/imageurl', {
+    fetch('https://smart-brain-fmpz.onrender.com/imageurl', {
           method: 'POST',
           headers: {'content-Type': 'application/json'},
           body: JSON.stringify({
@@ -104,7 +104,7 @@ class App extends Component {
     .then(response => response.json())
     .then(result => {
       if (result) {
-        fetch('http://localhost:3000/image', {
+        fetch('https://smart-brain-fmpz.onrender.com:3000/image', {
           method: 'put',
           headers: {'content-Type': 'application/json'},
           body: JSON.stringify({

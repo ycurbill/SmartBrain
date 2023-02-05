@@ -11,11 +11,11 @@ import image from './controllers/image.js';
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
+      host : 'postgres://smart_brain_db_h3ic_user:qnGIR5w56mRH24OsMccQqV7MabVsLrjK@dpg-cfg3dk82i3mg6pasoqgg-a/smart_brain_db_h3ic',
       port : 5432,
-      user : '',
-      password : '',
-      database : 'smart-brain'
+      user : 'smart_brain_db_h3ic_user',
+      password : 'qnGIR5w56mRH24OsMccQqV7MabVsLrjK',
+      database : 'smart_brain_db_h3ic'
     }
   });
 
@@ -38,6 +38,6 @@ app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db) }
 app.put('/image', (req, res) => { image.handleImage(req, res, db) });
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res) });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('app running');
 });
