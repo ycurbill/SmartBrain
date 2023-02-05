@@ -104,7 +104,7 @@ class App extends Component {
     .then(response => response.json())
     .then(result => {
       if (result) {
-        fetch('https://smart-brain-fmpz.onrender.com:3000/image', {
+        fetch('https://smart-brain-fmpz.onrender.com/image', {
           method: 'put',
           headers: {'content-Type': 'application/json'},
           body: JSON.stringify({
